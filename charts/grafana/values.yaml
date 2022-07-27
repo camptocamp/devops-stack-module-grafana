@@ -1,8 +1,10 @@
 grafana:
-    sidecar:
-      dashboards:
-        searchNamespace: ALL
-      datasources:
-        searchNamespace: ALL
-    plugins:
-      - grafana-piechart-panel
+  sidecar:
+    dashboards:
+      searchNamespace: ALL
+      labelValue: "1"
+    datasources:
+      labelValue: "1"
+      searchNamespace: ALL
+  plugins:
+    - grafana-piechart-panel
