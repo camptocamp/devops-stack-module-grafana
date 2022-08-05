@@ -6,13 +6,13 @@ A [DevOps Stack](https://devops-stack.io) module to deploy and configure [Grafan
 
 ```hcl
 module "grafana" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-grafana.git"
+  source           = "git::https://github.com/camptocamp/devops-stack-module-grafana.git"
   cluster_name     = module.eks.cluster_name
   argocd_namespace = local.argocd_namespace
   base_domain      = module.eks.base_domain
-  grafana = {
+  grafana          = {
     oidc = module.oidc.oidc
   }
-  depends_on = [module.monitoring, module.loki-stack]
+  depends_on       = [module.monitoring, module.loki-stack]
 }
 ```
