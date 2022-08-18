@@ -1,0 +1,10 @@
+---
+apiVersion: "v2"
+name: "grafana"
+version: "0"
+description: |
+  This chart install and configures Grafana dashboards for monitoring Kubernetes cluster with Prometheus.
+dependencies:
+  - name: "grafana"
+    version: "^6"
+    repository: "https://grafana.github.io/helm-charts"
