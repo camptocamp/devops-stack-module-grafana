@@ -59,7 +59,7 @@ resource "argocd_application" "this" {
     source {
       repo_url        = "https://github.com/camptocamp/devops-stack-module-grafana.git"
       path            = "charts/grafana"
-      target_revision = "HEAD"
+      target_revision = "main"
       helm {
         values = data.utils_deep_merge_yaml.values.output
       }
@@ -95,7 +95,6 @@ resource "argocd_application" "this" {
     resource.null_resource.dependencies,
   ]
 }
-
 
 resource "null_resource" "this" {
   depends_on = [
