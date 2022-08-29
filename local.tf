@@ -49,7 +49,8 @@ locals {
   }]
 
   grafana_defaults = {
-    enable                   = true
+    # By default is true because if we call this module it is because we want to enable it
+    enabled                  = true
     generic_oauth_extra_args = {}
     domain                   = "grafana.apps.${var.cluster_name}.${var.base_domain}"
     admin_password           = random_password.grafana_admin_password.result
