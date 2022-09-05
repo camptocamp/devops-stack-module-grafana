@@ -44,7 +44,7 @@ data "kubernetes_resource" "app_project" {
   api_version = "argoproj.io/v1alpha1"
   kind = "AppProject"
 
-  metadata = {
+  metadata {
     name = argocd_project.this.metadata.0.name
     namespace = var.argocd_namespace
   }
