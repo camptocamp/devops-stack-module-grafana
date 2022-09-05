@@ -41,14 +41,14 @@ data "utils_deep_merge_yaml" "values" {
 }
 
 resource "argocd_application" "this" {
-  timeouts {
-    create = "15m"
-    delete = "15m"
-  }
-
   metadata {
     name      = "grafana"
     namespace = var.argocd_namespace
+  }
+
+  timeouts {
+    create = "15m"
+    delete = "15m"
   }
 
   wait = true
