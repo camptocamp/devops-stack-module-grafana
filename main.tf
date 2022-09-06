@@ -40,15 +40,19 @@ data "utils_deep_merge_yaml" "values" {
   input = [for i in concat(local.helm_values, var.helm_values) : yamlencode(i)]
 }
 
-# data "kubernetes_resource" "app_project" {
-#   api_version = "argoproj.io/v1alpha1"
-#   kind = "AppProject"
+resource "kubernetes_annotations" "app_project" {
+  api_version = "argoproj.io/v1alpha1"
+  kind        = "AppProject"
 
-#   metadata {
-#     name = argocd_project.this.metadata.0.name
-#     namespace = var.argocd_namespace
-#   }
-# }
+  metadata {
+    name      = argocd_project.this.metadata.0.name
+    namespace = var.argocd_namespace
+  }
+
+  annotations = {
+    "argoproj.io/name" = argocd_project.this.metadata.0.name
+  }
+}
 
 resource "argocd_application" "this" {
   metadata {
@@ -64,7 +68,7 @@ resource "argocd_application" "this" {
   wait = true
 
   spec {
-    project = argocd_project.this.id
+    project = argocd_project.this.metadata.0.name
 
     source {
       repo_url        = "https://github.com/camptocamp/devops-stack-module-grafana.git"
@@ -103,6 +107,7 @@ resource "argocd_application" "this" {
 
   depends_on = [
     resource.null_resource.dependencies,
+    resource.kubernetes_annotations.app_project,
   ]
 }
 
