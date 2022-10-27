@@ -78,11 +78,12 @@ resource "argocd_application" "this" {
       }
 
       retry {
+        limit = "5"
         backoff = {
-          duration     = ""
-          max_duration = ""
+          duration     = "30s"
+          max_duration = "2m"
+          factor       = "2"
         }
-        limit = "0"
       }
 
       sync_options = [
