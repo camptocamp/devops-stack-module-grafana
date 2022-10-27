@@ -14,6 +14,12 @@ variable "argocd_namespace" {
   type = string
 }
 
+variable "target_revision" {
+  description = "Override of target revision of the application chart."
+  type        = string
+  default     = "main"
+}
+
 variable "cluster_issuer" {
   type    = string
   default = "ca-issuer"
