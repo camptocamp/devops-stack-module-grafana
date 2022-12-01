@@ -103,7 +103,8 @@ Description: Override of target revision of the application chart.
 
 Type: `string`
 
-Default: `"main"`
+Default: `"v1.0.0-alpha.1"`
+
 
 === Outputs
 
@@ -205,7 +206,7 @@ Description: n/a
 |[[input_target_revision]] <<input_target_revision,target_revision>>
 |Override of target revision of the application chart.
 |`string`
-|`"main"`
+|`"v1.0.0-alpha.1"`
 |no
 
 |===
