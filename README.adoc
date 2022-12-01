@@ -105,7 +105,6 @@ Type: `string`
 
 Default: `"v1.0.0-alpha.1"`
 
-
 === Outputs
 
 The following outputs are exported:
