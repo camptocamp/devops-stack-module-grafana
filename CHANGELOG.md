@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.1.0-alpha.1](https://github.com/camptocamp/devops-stack-module-grafana/compare/v1.0.0-alpha.1...v1.1.0-alpha.1) (2022-12-07)
+## [1.0.0-alpha.2](https://github.com/camptocamp/devops-stack-module-grafana/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2022-12-07)
 
 
 ### Features
