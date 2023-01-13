@@ -8,7 +8,3 @@ output "grafana_admin_password" {
   value       = local.grafana.admin_password
   sensitive   = true
 }
-
-output "grafana_enabled" {
-  value = local.grafana.enabled
-}
