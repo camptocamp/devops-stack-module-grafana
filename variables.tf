@@ -66,7 +66,7 @@ variable "dependency_ids" {
 #######################
 
 variable "grafana" {
-  description = "Most frequently used Grafana settings. This variable is merged with the local value `thanos_defaults`, which contains some sensible defaults. You can check the default values on the link:./local.tf[`local.tf`] file. If there still is anything other that needs to be customized, you can always pass on configuration values using the variable `helm_values`."
+  description = "Most frequently used Grafana settings. This variable is merged with the local value `grafana_defaults`, which contains some sensible defaults. You can check the default values on the link:./local.tf[`local.tf`] file. If there still is anything other that needs to be customized, you can always pass on configuration values using the variable `helm_values`."
   type        = any
   default     = {}
 }
