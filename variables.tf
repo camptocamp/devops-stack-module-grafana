@@ -3,15 +3,18 @@
 #######################
 
 variable "cluster_name" {
-  type = string
+  description = "Name given to the cluster. Value used for the ingress' URL of the application."
+  type        = string
 }
 
 variable "base_domain" {
-  type = string
+  description = "Base domain of the cluster. Value used for the ingress' URL of the application."
+  type        = string
 }
 
 variable "argocd_namespace" {
-  type = string
+  description = "Namespace used by Argo CD where the Application and AppProject resources should be created."
+  type        = string
 }
 
 variable "target_revision" {
@@ -21,25 +24,41 @@ variable "target_revision" {
 }
 
 variable "cluster_issuer" {
-  type    = string
-  default = "ca-issuer"
+  description = "SSL certificate issuer to use. Usually you would configure this value as `letsencrypt-staging` or `letsencrypt-prod` on your root `*.tf` files."
+  type        = string
+  default     = "ca-issuer"
 }
 
 variable "namespace" {
-  type    = string
-  default = "grafana"
+  description = "Namespace where the applications's Kubernetes resources should be created. Namespace will be created in case it doesn't exist."
+  type        = string
+  default     = "grafana"
 }
 
 variable "helm_values" {
-  description = "Helm values, passed as a list of HCL structures."
+  description = "Helm chart value overrides. They should be passed as a list of HCL structures."
   type        = any
   default     = []
 }
 
-variable "dependency_ids" {
-  type = map(string)
+variable "app_autosync" {
+  description = "Automated sync options for the Argo CD Application resource."
+  type = object({
+    allow_empty = optional(bool)
+    prune       = optional(bool)
+    self_heal   = optional(bool)
+  })
+  default = {
+    allow_empty = false
+    prune       = true
+    self_heal   = true
+  }
+}
 
-  default = {}
+variable "dependency_ids" {
+  description = "IDs of the other modules on which this module depends on."
+  type        = map(string)
+  default     = {}
 }
 
 #######################
@@ -47,7 +66,7 @@ variable "dependency_ids" {
 #######################
 
 variable "grafana" {
-  description = "Grafana settings"
+  description = "Most frequently used Grafana settings. This variable is merged with the local value `grafana_defaults`, which contains some sensible defaults. You can check the default values on the link:./local.tf[`local.tf`] file. If there still is anything other that needs to be customized, you can always pass on configuration values using the variable `helm_values`."
   type        = any
   default     = {}
 }
