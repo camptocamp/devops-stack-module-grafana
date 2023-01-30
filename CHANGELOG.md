@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0-alpha.4](https://github.com/camptocamp/devops-stack-module-grafana/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2023-01-30)
+
+
+### Bug Fixes
+
+* add tobool function ([#17](https://github.com/camptocamp/devops-stack-module-grafana/issues/17)) ([b3939a7](https://github.com/camptocamp/devops-stack-module-grafana/commit/b3939a74adfab0a62f95f2e54e17697aecfc8654))
+
 ## [1.0.0-alpha.3](https://github.com/camptocamp/devops-stack-module-grafana/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2023-01-30)
 
 
