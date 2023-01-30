@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.0.0-alpha.3](https://github.com/camptocamp/devops-stack-module-grafana/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2023-01-30)
+
+
+### Features
+
+* add variable to configure auto-sync of the Argo CD Application ([#12](https://github.com/camptocamp/devops-stack-module-grafana/issues/12)) ([dd2ad20](https://github.com/camptocamp/devops-stack-module-grafana/commit/dd2ad20e3db32f753e2c58a6fb993ecc31024589))
+* **helm:** bump version to 6.55 ([#13](https://github.com/camptocamp/devops-stack-module-grafana/issues/13)) ([701948d](https://github.com/camptocamp/devops-stack-module-grafana/commit/701948d1d9843f152a6f0b675cba3f31bd660635))
+
+
+### Miscellaneous Chores
+
+* release 1.0.0-alpha.3 ([#15](https://github.com/camptocamp/devops-stack-module-grafana/issues/15)) ([06266e7](https://github.com/camptocamp/devops-stack-module-grafana/commit/06266e7801b87a8e86ca2bfbb7dc96a6ca7919e9))
+
 ## [1.0.0-alpha.2](https://github.com/camptocamp/devops-stack-module-grafana/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2022-12-07)
 
 
