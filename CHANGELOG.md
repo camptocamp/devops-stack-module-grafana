@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0-alpha.5](https://github.com/camptocamp/devops-stack-module-grafana/compare/v1.0.0-alpha.4...v1.0.0-alpha.5) (2023-03-09)
+
+
+### Features
+
+* bump chart version to 6.52.1 ([#19](https://github.com/camptocamp/devops-stack-module-grafana/issues/19)) ([5ad390b](https://github.com/camptocamp/devops-stack-module-grafana/commit/5ad390b8a09b1398c045bacbdfd5161eebfad607))
+
 ## [1.0.0-alpha.4](https://github.com/camptocamp/devops-stack-module-grafana/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2023-01-30)
 
 
