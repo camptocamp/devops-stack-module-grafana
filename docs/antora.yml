@@ -1,0 +1,7 @@
+---
+name: "grafana"
+title: "Grafana Module"
+version: true
+start_page: README.adoc
+nav:
+  - "modules/ROOT/nav.adoc"
