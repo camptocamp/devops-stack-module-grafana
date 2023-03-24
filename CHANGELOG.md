@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0](https://github.com/camptocamp/devops-stack-module-grafana/compare/v1.0.0-alpha.5...v1.0.0) (2023-03-24)
+
+
+### Documentation
+
+* add docs structure and PR template ([#21](https://github.com/camptocamp/devops-stack-module-grafana/issues/21)) ([fc8e5a4](https://github.com/camptocamp/devops-stack-module-grafana/commit/fc8e5a4806edde2aac067a68f6b408232b8e2c98))
+
 ## [1.0.0-alpha.5](https://github.com/camptocamp/devops-stack-module-grafana/compare/v1.0.0-alpha.4...v1.0.0-alpha.5) (2023-03-09)
 
 
