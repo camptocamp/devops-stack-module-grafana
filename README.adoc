@@ -5,11 +5,11 @@
 
 The following providers are used by this module:
 
-- [[provider_argocd]] <<provider_argocd,argocd>>
+- [[provider_random]] <<provider_random,random>>
 
 - [[provider_null]] <<provider_null,null>>
 
-- [[provider_random]] <<provider_random,random>>
+- [[provider_argocd]] <<provider_argocd,argocd>>
 
 - [[provider_utils]] <<provider_utils,utils>>
 
@@ -29,9 +29,9 @@ The following resources are used by this module:
 
 The following input variables are required:
 
-==== [[input_argocd_namespace]] <<input_argocd_namespace,argocd_namespace>>
+==== [[input_cluster_name]] <<input_cluster_name,cluster_name>>
 
-Description: Namespace used by Argo CD where the Application and AppProject resources should be created.
+Description: Name given to the cluster. Value used for the ingress' URL of the application.
 
 Type: `string`
 
@@ -41,15 +41,47 @@ Description: Base domain of the cluster. Value used for the ingress' URL of the 
 
 Type: `string`
 
-==== [[input_cluster_name]] <<input_cluster_name,cluster_name>>
+==== [[input_argocd_namespace]] <<input_argocd_namespace,argocd_namespace>>
 
-Description: Name given to the cluster. Value used for the ingress' URL of the application.
+Description: Namespace used by Argo CD where the Application and AppProject resources should be created.
 
 Type: `string`
 
 === Optional Inputs
 
 The following input variables are optional (have default values):
+
+==== [[input_target_revision]] <<input_target_revision,target_revision>>
+
+Description: Override of target revision of the application chart.
+
+Type: `string`
+
+Default: `"v1.0.0"`
+
+==== [[input_cluster_issuer]] <<input_cluster_issuer,cluster_issuer>>
+
+Description: SSL certificate issuer to use. Usually you would configure this value as `letsencrypt-staging` or `letsencrypt-prod` on your root `*.tf` files.
+
+Type: `string`
+
+Default: `"ca-issuer"`
+
+==== [[input_namespace]] <<input_namespace,namespace>>
+
+Description: Namespace where the applications's Kubernetes resources should be created. Namespace will be created in case it doesn't exist.
+
+Type: `string`
+
+Default: `"grafana"`
+
+==== [[input_helm_values]] <<input_helm_values,helm_values>>
+
+Description: Helm chart value overrides. They should be passed as a list of HCL structures.
+
+Type: `any`
+
+Default: `[]`
 
 ==== [[input_app_autosync]] <<input_app_autosync,app_autosync>>
 
@@ -75,14 +107,6 @@ Default:
 }
 ----
 
-==== [[input_cluster_issuer]] <<input_cluster_issuer,cluster_issuer>>
-
-Description: SSL certificate issuer to use. Usually you would configure this value as `letsencrypt-staging` or `letsencrypt-prod` on your root `*.tf` files.
-
-Type: `string`
-
-Default: `"ca-issuer"`
-
 ==== [[input_dependency_ids]] <<input_dependency_ids,dependency_ids>>
 
 Description: IDs of the other modules on which this module depends on.
@@ -99,41 +123,17 @@ Type: `any`
 
 Default: `{}`
 
-==== [[input_helm_values]] <<input_helm_values,helm_values>>
-
-Description: Helm chart value overrides. They should be passed as a list of HCL structures.
-
-Type: `any`
-
-Default: `[]`
-
-==== [[input_namespace]] <<input_namespace,namespace>>
-
-Description: Namespace where the applications's Kubernetes resources should be created. Namespace will be created in case it doesn't exist.
-
-Type: `string`
-
-Default: `"grafana"`
-
-==== [[input_target_revision]] <<input_target_revision,target_revision>>
-
-Description: Override of target revision of the application chart.
-
-Type: `string`
-
-Default: `"v1.0.0-alpha.5"`
-
 === Outputs
 
 The following outputs are exported:
 
-==== [[output_grafana_admin_password]] <<output_grafana_admin_password,grafana_admin_password>>
-
-Description: The admin password for Grafana.
-
 ==== [[output_id]] <<output_id,id>>
 
 Description: ID to pass other modules in order to refer to this module as a dependency.
+
+==== [[output_grafana_admin_password]] <<output_grafana_admin_password,grafana_admin_password>>
+
+Description: The admin password for Grafana.
 // END_TF_DOCS
 // BEGIN_TF_TABLES
 
@@ -143,10 +143,10 @@ Description: ID to pass other modules in order to refer to this module as a depe
 [cols="a,a",options="header,autowidth"]
 |===
 |Name |Version
-|[[provider_argocd]] <<provider_argocd,argocd>> |n/a
 |[[provider_null]] <<provider_null,null>> |n/a
 |[[provider_random]] <<provider_random,random>> |n/a
 |[[provider_utils]] <<provider_utils,utils>> |n/a
+|[[provider_argocd]] <<provider_argocd,argocd>> |n/a
 |===
 
 = Resources
@@ -168,6 +168,48 @@ Description: ID to pass other modules in order to refer to this module as a depe
 [cols="a,a,a,a,a",options="header,autowidth"]
 |===
 |Name |Description |Type |Default |Required
+|[[input_cluster_name]] <<input_cluster_name,cluster_name>>
+|Name given to the cluster. Value used for the ingress' URL of the application.
+|`string`
+|n/a
+|yes
+
+|[[input_base_domain]] <<input_base_domain,base_domain>>
+|Base domain of the cluster. Value used for the ingress' URL of the application.
+|`string`
+|n/a
+|yes
+
+|[[input_argocd_namespace]] <<input_argocd_namespace,argocd_namespace>>
+|Namespace used by Argo CD where the Application and AppProject resources should be created.
+|`string`
+|n/a
+|yes
+
+|[[input_target_revision]] <<input_target_revision,target_revision>>
+|Override of target revision of the application chart.
+|`string`
+|`"v1.0.0"`
+|no
+
+|[[input_cluster_issuer]] <<input_cluster_issuer,cluster_issuer>>
+|SSL certificate issuer to use. Usually you would configure this value as `letsencrypt-staging` or `letsencrypt-prod` on your root `*.tf` files.
+|`string`
+|`"ca-issuer"`
+|no
+
+|[[input_namespace]] <<input_namespace,namespace>>
+|Namespace where the applications's Kubernetes resources should be created. Namespace will be created in case it doesn't exist.
+|`string`
+|`"grafana"`
+|no
+
+|[[input_helm_values]] <<input_helm_values,helm_values>>
+|Helm chart value overrides. They should be passed as a list of HCL structures.
+|`any`
+|`[]`
+|no
+
 |[[input_app_autosync]] <<input_app_autosync,app_autosync>>
 |Automated sync options for the Argo CD Application resource.
 |
@@ -194,30 +236,6 @@ object({
 
 |no
 
-|[[input_argocd_namespace]] <<input_argocd_namespace,argocd_namespace>>
-|Namespace used by Argo CD where the Application and AppProject resources should be created.
-|`string`
-|n/a
-|yes
-
-|[[input_base_domain]] <<input_base_domain,base_domain>>
-|Base domain of the cluster. Value used for the ingress' URL of the application.
-|`string`
-|n/a
-|yes
-
-|[[input_cluster_issuer]] <<input_cluster_issuer,cluster_issuer>>
-|SSL certificate issuer to use. Usually you would configure this value as `letsencrypt-staging` or `letsencrypt-prod` on your root `*.tf` files.
-|`string`
-|`"ca-issuer"`
-|no
-
-|[[input_cluster_name]] <<input_cluster_name,cluster_name>>
-|Name given to the cluster. Value used for the ingress' URL of the application.
-|`string`
-|n/a
-|yes
-
 |[[input_dependency_ids]] <<input_dependency_ids,dependency_ids>>
 |IDs of the other modules on which this module depends on.
 |`map(string)`
@@ -230,24 +248,6 @@ object({
 |`{}`
 |no
 
-|[[input_helm_values]] <<input_helm_values,helm_values>>
-|Helm chart value overrides. They should be passed as a list of HCL structures.
-|`any`
-|`[]`
-|no
-
-|[[input_namespace]] <<input_namespace,namespace>>
-|Namespace where the applications's Kubernetes resources should be created. Namespace will be created in case it doesn't exist.
-|`string`
-|`"grafana"`
-|no
-
-|[[input_target_revision]] <<input_target_revision,target_revision>>
-|Override of target revision of the application chart.
-|`string`
-|`"v1.0.0-alpha.5"`
-|no
-
 |===
 
 = Outputs
@@ -255,7 +255,7 @@ object({
 [cols="a,a",options="header,autowidth"]
 |===
 |Name |Description
-|[[output_grafana_admin_password]] <<output_grafana_admin_password,grafana_admin_password>> |The admin password for Grafana.
 |[[output_id]] <<output_id,id>> |ID to pass other modules in order to refer to this module as a dependency.
+|[[output_grafana_admin_password]] <<output_grafana_admin_password,grafana_admin_password>> |The admin password for Grafana.
 |===
 // END_TF_TABLES
